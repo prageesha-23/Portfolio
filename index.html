@@ -1,0 +1,996 @@
+<!DOCTYPE html>
+<html lang="en" x-data="app()" :class="{'dark':dark}" class="scroll-smooth">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description"
+    content="Prageesha — Software Engineer and AI enthusiast. Fast, clean and accessible digital products.">
+  <meta name="keywords" content="software engineer, AI enthusiast, portfolio, Tailwind CSS, Alpine.js">
+  <meta name="author" content="Prageesha">
+  <meta property="og:title" content="Prageesha - Software Engineer and AI enthusiast">
+  <meta property="og:description" content="I design and build digital products that people love to use.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://prageesha.dev">
+  <title>Prageesha — Software Engineer &amp; AI Enthusiast</title>
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+  <link rel="stylesheet" href="style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=PT+Sans:ital,wght@0,400;0,700;1,400&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/devicon.min.css">
+
+  <script src="script.js"></script>
+
+</head>
+
+<body class="bg-white dark:bg-zinc-950 text-zinc-900 dark:text-zinc-100 antialiased">
+
+  <header class="fixed top-0 left-0 right-0 z-50 transition-all duration-300"
+    :class="scrolled?'bg-white/90 dark:bg-zinc-950/90 backdrop-blur-md shadow-sm shadow-black/5':'bg-transparent'">
+    <nav class="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between">
+      <a href="index.html" class="font-display font-bold text-xl tracking-tight z-10">
+        <span class="text-zinc-900 dark:text-white">Prageesha</span>
+      </a>
+      </ul>
+      <div class="flex items-center gap-3">
+        <svg x-show="!mobileMenu" xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24"
+          stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+        </svg>
+        <svg x-show="mobileMenu" xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24"
+          stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+        </svg>
+        </button>
+      </div>
+    </nav>
+    <div x-show="mobileMenu" x-cloak x-transition:enter="transition ease-out duration-200"
+      x-transition:enter-start="opacity-0 -translate-y-2" x-transition:enter-end="opacity-100 translate-y-0"
+      x-transition:leave="transition ease-in duration-150" x-transition:leave-start="opacity-100 translate-y-0"
+      x-transition:leave-end="opacity-0 -translate-y-2"
+      class="md:hidden bg-white dark:bg-zinc-950 border-t border-zinc-100 dark:border-zinc-900">
+    </div>
+  </header>
+
+
+  <!-- ═══ NAV ═══ -->
+
+  <header class="fixed inset-x-0 top-0 z-50 transition-all duration-300"
+    :class="sc?'bg-white/90 dark:bg-zinc-950/90 backdrop-blur-md shadow-sm shadow-black/5':''">
+    <nav class="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between" aria-label="Main navigation">
+
+      <a href="#hero" class="font-display font-bold text-xl tracking-tight relative z-10"> </a>
+
+      <ul class="hidden md:flex items-center gap-8 text-sm" role="list">
+        <li><a href="#about"
+            class="nl text-zinc-500 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-white transition-colors"
+            :class="s==='about'?'on !text-zinc-900 dark:!text-white':''">About</a></li>
+        <li><a href="#projects"
+            class="nl text-zinc-500 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-white transition-colors"
+            :class="s==='projects'?'on !text-zinc-900 dark:!text-white':''">Projects</a></li>
+        <li><a href="#skills"
+            class="nl text-zinc-500 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-white transition-colors"
+            :class="s==='skills'?'on !text-zinc-900 dark:!text-white':''">Skills</a></li>
+        <li><a href="#achievements"
+            class="nl text-zinc-500 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-white transition-colors"
+            :class="s==='achievements'?'on !text-zinc-900 dark:!text-white':''">Achievements</a></li>
+        <li><a href="#contact"
+            class="nl text-zinc-500 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-white transition-colors"
+            :class="s==='contact'?'on !text-zinc-900 dark:!text-white':''">Contact</a></li>
+      </ul>
+
+      <div class="flex items-center gap-3">
+        <!-- dark toggle -->
+        <button @click="dark=!dark"
+          class="w-9 h-9 flex items-center justify-center rounded-full border border-zinc-200 dark:border-zinc-800 hover:bg-zinc-100 dark:hover:bg-zinc-900 transition-colors"
+          :aria-label="dark?'Light mode':'Dark mode'">
+          <svg x-show="!dark" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+              d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z" />
+          </svg>
+          <svg x-show="dark" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+              d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364-6.364l-.707.707M6.343 17.657l-.707.707M17.657 17.657l-.707-.707M6.343 6.343l-.707-.707M12 8a4 4 0 100 8 4 4 0 000-8z" />
+          </svg>
+        </button>
+
+        <!-- hamburger -->
+        <button @click="mm=!mm"
+          class="md:hidden w-9 h-9 flex items-center justify-center rounded-full border border-zinc-200 dark:border-zinc-800"
+          :aria-expanded="mm" aria-label="Toggle menu">
+          <svg x-show="!mm" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+          </svg>
+          <svg x-show="mm" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+          </svg>
+        </button>
+      </div>
+    </nav>
+
+    <!-- mobile menu -->
+
+    <div x-show="mm" x-cloak x-transition:enter="transition ease-out duration-200"
+      x-transition:enter-start="opacity-0 -translate-y-2" x-transition:enter-end="opacity-100 translate-y-0"
+      x-transition:leave="transition ease-in duration-150" x-transition:leave-start="opacity-100 translate-y-0"
+      x-transition:leave-end="opacity-0 -translate-y-2"
+      class="md:hidden bg-white dark:bg-zinc-950 border-t border-zinc-100 dark:border-zinc-900">
+      <ul class="flex flex-col px-6 py-5 gap-4 text-sm font-medium" role="list">
+        <li><a href="#about" @click="mm=false"
+            class="block text-zinc-700 dark:text-zinc-300 hover:text-accent transition-colors">About</a></li>
+        <li><a href="#projects" @click="mm=false"
+            class="block text-zinc-700 dark:text-zinc-300 hover:text-accent transition-colors">Projects</a></li>
+        <li><a href="#skills" @click="mm=false"
+            class="block text-zinc-700 dark:text-zinc-300 hover:text-accent transition-colors">Skills</a></li>
+        <li><a href="#achievements" @click="mm=false"
+            class="block text-zinc-700 dark:text-zinc-300 hover:text-accent transition-colors">Achievements</a></li>
+        <li><a href="#contact" @click="mm=false"
+            class="block text-zinc-700 dark:text-zinc-300 hover:text-accent transition-colors">Get in Touch</a></li>
+        <li class="pt-2 border-t border-zinc-100 dark:border-zinc-900">
+          <a href="#contact" @click="mm=false"
+            class="inline-flex shimmer bg-accent text-white font-medium text-sm px-5 py-2.5 rounded-full">Hire me →</a>
+        </li>
+      </ul>
+    </div>
+  </header>
+
+  <main>
+
+    <!-- ═══ HERO ═══ -->
+
+    <section id="hero" class="relative min-h-screen flex items-center pt-16 overflow-hidden">
+      <div class="absolute top-1/4 right-0 w-96 h-96 bg-accent/10 rounded-full blur-3xl pointer-events-none"
+        aria-hidden="true"></div>
+      <div
+        class="absolute bottom-1/4 left-0 w-64 h-64 bg-zinc-200/50 dark:bg-zinc-800/30 rounded-full blur-3xl pointer-events-none"
+        aria-hidden="true"></div>
+
+      <div class="relative z-10 max-w-6xl mx-auto px-6 py-24 w-full">
+        <div class="grid md:grid-cols-2 gap-12 items-center">
+
+          <div>
+            <p class="reveal text-sm font-medium text-accent tracking-widest uppercase mb-4">Available for work</p>
+            <h1
+              class="reveal d1 font-display font-bold text-5xl md:text-6xl lg:text-7xl leading-[1.05] tracking-tight text-zinc-900 dark:text-white mb-6">
+              Hi, I'm <span class="text-accent">Prageesha</span>
+            </h1>
+            <p
+              class="reveal d2 text-lg md:text-xl text-zinc-500 dark:text-zinc-400 font-light leading-relaxed max-w-md mb-10">
+              Aspiring <strong class="font-medium text-zinc-700 dark:text-zinc-300">Software Engineer &amp; AI
+                Enthusiast </strong>.
+              A tech enthusiast with a brain wired for logic and a heart set on impact.
+            </p>
+
+            <div class="reveal d3 flex flex-wrap gap-4">
+              <a href="Prageesha_CV.pdf" download="Prageesha_Resume.pdf"
+                class="shimmer inline-flex items-center gap-2 bg-zinc-900 dark:bg-white text-white dark:text-zinc-900 font-medium px-7 py-3.5 rounded-full hover:bg-zinc-700 dark:hover:bg-zinc-200 transition-colors text-sm">
+                My Resume
+                <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                    d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
+                </svg>
+              </a>
+              <a href="#getintouch"
+                class="inline-flex items-center gap-2 border border-zinc-300 dark:border-zinc-700 text-zinc-700 dark:text-zinc-300 font-medium px-7 py-3.5 rounded-full hover:bg-zinc-50 dark:hover:bg-zinc-900 transition-colors text-sm">Get
+                in touch</a>
+            </div>
+
+            <div class="reveal d4 flex gap-8 mt-14 pt-8 border-t border-zinc-100 dark:border-zinc-900">
+              <div>
+                <p class="font-display font-bold text-3xl text-zinc-900 dark:text-white">7+</p>
+                <p class="text-xs text-zinc-500 dark:text-zinc-400 mt-1">Projects</p>
+              </div>
+              <div>
+                <p class="font-display font-bold text-3xl text-zinc-900 dark:text-white">20+</p>
+                <p class="text-xs text-zinc-500 dark:text-zinc-400 mt-1">Skills</p>
+              </div>
+              <div>
+                <p class="font-display font-bold text-3xl text-zinc-900 dark:text-white">1y+</p>
+                <p class="text-xs text-zinc-500 dark:text-zinc-400 mt-1">Experience</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="reveal d2 flex justify-center md:justify-end">
+            <div class="relative w-72 h-72 md:w-80 md:h-80 lg:w-96 lg:h-96">
+              <div class="pf w-full h-full rounded-3xl">
+                <img src="img/pic.JPG" alt="Prageesha — Aspiring Software Engineer" loading="eager">
+              </div>
+              <div
+                class="absolute -bottom-4 -left-4 bg-accent text-white font-display font-bold text-sm px-4 py-2.5 rounded-2xl shadow-lg">
+                Open to Work</div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══ ABOUT ═══ -->
+
+    <section id="about" class="py-24 bg-zinc-50 dark:bg-zinc-900/40">
+      <div class="max-w-6xl mx-auto px-6">
+        <div class="grid md:grid-cols-2 gap-16 items-center">
+
+          <div class="reveal order-2 md:order-1">
+            <div class="pf w-full aspect-square max-w-sm mx-auto rounded-3xl">
+              <img src=img/pic.JPG alt="prageesha" loading="lazy">
+            </div>
+          </div>
+
+          <div class="order-1 md:order-2">
+            <p class="reveal text-xs font-medium text-accent tracking-widest uppercase mb-3">About me</p>
+            <h2
+              class="reveal d1 font-display font-bold text-4xl md:text-5xl text-zinc-900 dark:text-white leading-tight mb-6">
+              A bit about<br>who I am</h2>
+            <p class="reveal d2 text-zinc-500 dark:text-zinc-400 leading-relaxed mb-4">
+              I'm Prageesha, a Computer Science undergraduate at the Informatics Institute of Technology (IIT),
+              affiliated with the University of Westminster, UK. Currently in my placement year, I'm actively looking
+              for Software Engineering opportunities where I can apply my technical skills and continue growing as a
+              developer.
+            <p class="reveal d3 text-zinc-500 dark:text-zinc-400 leading-relaxed mb-8">
+              I'm passionate about Software Engineering and Artificial Intelligence, and I enjoy transforming ideas into
+              practical, user-centric solutions.
+            </p>
+            <p class="reveal d3 text-zinc-500 dark:text-zinc-400 leading-relaxed mb-8">
+              As an active learner, I'm always exploring new technologies, building projects, and refining my craft one
+              line of code at a time.
+            </p>
+            <div class="reveal d4">
+              <p class="text-xs font-medium text-zinc-500 dark:text-zinc-400 uppercase tracking-widest mb-3">Stack &amp;
+                tools</p>
+              <div class="flex flex-wrap gap-2" role="list" aria-label="Skills">
+                <span role="listitem"
+                  class="stag text-sm bg-white dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 text-zinc-700 dark:text-zinc-300 px-3.5 py-1.5 rounded-full hover:border-accent">Tailwind
+                  CSS</span>
+                <span role="listitem"
+                  class="stag text-sm bg-white dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 text-zinc-700 dark:text-zinc-300 px-3.5 py-1.5 rounded-full hover:border-accent">Alpine.js</span>
+                <span role="listitem"
+                  class="stag text-sm bg-white dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 text-zinc-700 dark:text-zinc-300 px-3.5 py-1.5 rounded-full hover:border-accent">Figma</span>
+                <span role="listitem"
+                  class="stag text-sm bg-white dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 text-zinc-700 dark:text-zinc-300 px-3.5 py-1.5 rounded-full hover:border-accent">HTML
+                  / CSS</span>
+                <span role="listitem"
+                  class="stag text-sm bg-white dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 text-zinc-700 dark:text-zinc-300 px-3.5 py-1.5 rounded-full hover:border-accent">JavaScript</span>
+                <span role="listitem"
+                  class="stag text-sm bg-white dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 text-zinc-700 dark:text-zinc-300 px-3.5 py-1.5 rounded-full hover:border-accent">Symfony</span>
+                <span role="listitem"
+                  class="stag text-sm bg-white dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 text-zinc-700 dark:text-zinc-300 px-3.5 py-1.5 rounded-full hover:border-accent">Framer</span>
+                <span role="listitem"
+                  class="stag text-sm bg-white dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 text-zinc-700 dark:text-zinc-300 px-3.5 py-1.5 rounded-full hover:border-accent">Webflow</span>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+
+    <!-- ═══ PROJECTS ═══ -->
+
+    <section id="projects" class="py-24">
+      <div class="max-w-6xl mx-auto px-6">
+        <div class="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-14">
+          <div>
+            <p class="reveal text-xs font-medium text-accent tracking-widest uppercase mb-3">Portfolio</p>
+            <h2 class="reveal d1 font-display font-bold text-4xl md:text-5xl text-zinc-900 dark:text-white">Projects
+            </h2>
+          </div>
+
+        </div>
+
+        <div class="grid md:grid-cols-3 gap-6">
+
+          <article
+            class="reveal d1 card-h group bg-white dark:bg-zinc-900 rounded-2xl overflow-hidden border border-zinc-100 dark:border-zinc-800 hover:border-accent">
+            <div class="pf w-full h-44">
+              <img src="img/t.png" alt="PocketRoom" loading="lazy">
+            </div>
+            <div class="p-6">
+              <div class="flex items-center gap-3 mb-3">
+                <span class="text-xs text-zinc-400">May 2026 – Present</span>
+              </div>
+              <a href="blog-article.html">
+                <h3
+                  class="font-display font-bold text-lg text-zinc-900 dark:text-white mb-2 group-hover:text-accent transition-colors">
+                  Tripinger</h3>
+              </a>
+              <p class="text-sm text-zinc-500 dark:text-zinc-400 leading-relaxed mb-4">A unified travel platform that
+                leverages AI and location intelligence to help travelers plan, book, and navigate personalized journeys
+                across Sri Lanka.</p>
+              <div class="flex flex-wrap gap-2" role="list" aria-label="Skills">
+                <span role="listitem"
+                  class="stag text-sm bg-white dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 text-zinc-700 dark:text-zinc-300 px-3.5 py-1.5 rounded-full hover:border-accent">React</span>
+                <span role="listitem"
+                  class="stag text-sm bg-white dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 text-zinc-700 dark:text-zinc-300 px-3.5 py-1.5 rounded-full hover:border-accent">TypeScript</span>
+                <span role="listitem"
+                  class="stag text-sm bg-white dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 text-zinc-700 dark:text-zinc-300 px-3.5 py-1.5 rounded-full hover:border-accent">Tailwind
+                  CSS</span>
+                <span role="listitem"
+                  class="stag text-sm bg-white dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 text-zinc-700 dark:text-zinc-300 px-3.5 py-1.5 rounded-full hover:border-accent">Node.js</span>
+                <span role="listitem"
+                  class="stag text-sm bg-white dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 text-zinc-700 dark:text-zinc-300 px-3.5 py-1.5 rounded-full hover:border-accent">Nest.js</span>
+                <span role="listitem"
+                  class="stag text-sm bg-white dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 text-zinc-700 dark:text-zinc-300 px-3.5 py-1.5 rounded-full hover:border-accent">PostgreSQL</span>
+                <span role="listitem"
+                  class="stag text-sm bg-white dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 text-zinc-700 dark:text-zinc-300 px-3.5 py-1.5 rounded-full hover:border-accent">OpenAI
+                  API</span>
+                <span role="listitem"
+                  class="stag text-sm bg-white dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 text-zinc-700 dark:text-zinc-300 px-3.5 py-1.5 rounded-full hover:border-accent">Mapbox</span>
+              </div>
+
+            </div>
+          </article>
+
+          <a href="https://pocketroom.lk/" target="_blank" rel="noopener noreferrer" class="block h-full">
+            <article
+              class="reveal d1 card-h group bg-white dark:bg-zinc-900 rounded-2xl overflow-hidden border border-zinc-100 dark:border-zinc-800 hover:border-accent h-full">
+              <div class="pf w-full h-44">
+                <img src="/img/pocketroom.jpg" alt="PocketRoom" loading="lazy">
+              </div>
+              <div class="p-6">
+                <div class="flex items-center gap-3 mb-3">
+                  <span class="text-xs text-zinc-400">Sep 2025 - Mar 2026</span>
+                </div>
+                <h3
+                  class="font-display font-bold text-lg text-zinc-900 dark:text-white mb-2 group-hover:text-accent transition-colors">
+                  PocketRoom</h3>
+                <p class="text-sm text-zinc-500 dark:text-zinc-400 leading-relaxed mb-4">An AR and AI-powered furniture
+                  visualization app that enables users to seamlessly preview and place 3D furniture in their own spaces
+                  before making purchase decisions.</p>
+                <div class="flex flex-wrap gap-2" role="list" aria-label="Skills">
+                  <span role="listitem"
+                    class="stag text-sm bg-white dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 text-zinc-700 dark:text-zinc-300 px-3.5 py-1.5 rounded-full hover:border-accent">Flutter</span>
+                  <span role="listitem"
+                    class="stag text-sm bg-white dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 text-zinc-700 dark:text-zinc-300 px-3.5 py-1.5 rounded-full hover:border-accent">Unity(AR)</span>
+                  <span role="listitem"
+                    class="stag text-sm bg-white dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 text-zinc-700 dark:text-zinc-300 px-3.5 py-1.5 rounded-full hover:border-accent">React</span>
+                  <span role="listitem"
+                    class="stag text-sm bg-white dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 text-zinc-700 dark:text-zinc-300 px-3.5 py-1.5 rounded-full hover:border-accent">Vite</span>
+                </div>
+
+              </div>
+            </article>
+          </a>
+
+
+          <article
+            class="reveal d1 card-h group bg-white dark:bg-zinc-900 rounded-2xl overflow-hidden border border-zinc-100 dark:border-zinc-800 hover:border-accent">
+            <div class="pf w-full h-44">
+              <img src="img/pd.png" alt="PocketRoom" loading="lazy">
+            </div>
+            <div class="p-6">
+              <div class="flex items-center gap-3 mb-3">
+                <span class="text-xs text-zinc-400">Jan 2026 – Apr 2026</span>
+              </div>
+              <a href="blog-article.html">
+                <h3
+                  class="font-display font-bold text-lg text-zinc-900 dark:text-white mb-2 group-hover:text-accent transition-colors">
+                  Personal Data Privacy Dashboard</h3>
+              </a>
+              <p class="text-sm text-zinc-500 dark:text-zinc-400 leading-relaxed mb-4">A privacy-centric dashboard that
+                helps users manage data access, permissions, and consent while ensuring transparency through detailed
+                audit trails.</p>
+              <div class="flex flex-wrap gap-2" role="list" aria-label="Skills">
+                <span role="listitem"
+                  class="stag text-sm bg-white dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 text-zinc-700 dark:text-zinc-300 px-3.5 py-1.5 rounded-full hover:border-accent">Java</span>
+                <span role="listitem"
+                  class="stag text-sm bg-white dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 text-zinc-700 dark:text-zinc-300 px-3.5 py-1.5 rounded-full hover:border-accent">Spring
+                  Boot</span>
+                <span role="listitem"
+                  class="stag text-sm bg-white dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 text-zinc-700 dark:text-zinc-300 px-3.5 py-1.5 rounded-full hover:border-accent">React</span>
+                <span role="listitem"
+                  class="stag text-sm bg-white dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 text-zinc-700 dark:text-zinc-300 px-3.5 py-1.5 rounded-full hover:border-accent">PostgreSQL</span>
+              </div>
+
+            </div>
+          </article>
+
+          <article
+            class="reveal d1 card-h group bg-white dark:bg-zinc-900 rounded-2xl overflow-hidden border border-zinc-100 dark:border-zinc-800 hover:border-accent">
+            <div class="pf w-full h-44">
+              <img src="img/learning-tracker1.png" alt="PocketRoom" loading="lazy">
+            </div>
+            <div class="p-6">
+              <div class="flex items-center gap-3 mb-3">
+                <span class="text-xs text-zinc-400">Oct 2025 – Nov 2025</span>
+              </div>
+              <a href="blog-article.html">
+                <h3
+                  class="font-display font-bold text-lg text-zinc-900 dark:text-white mb-2 group-hover:text-accent transition-colors">
+                  Personal AI Learning Tracker</h3>
+              </a>
+              <p class="text-sm text-zinc-500 dark:text-zinc-400 leading-relaxed mb-4">An AI-powered learning tracker
+                that enables users to monitor progress, generate study summaries, and visualize skill growth over time.
+              </p>
+              <div class="flex flex-wrap gap-2" role="list" aria-label="Skills">
+                <span role="listitem"
+                  class="stag text-sm bg-white dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 text-zinc-700 dark:text-zinc-300 px-3.5 py-1.5 rounded-full hover:border-accent">Next.js</span>
+                <span role="listitem"
+                  class="stag text-sm bg-white dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 text-zinc-700 dark:text-zinc-300 px-3.5 py-1.5 rounded-full hover:border-accent">Node.js</span>
+                <span role="listitem"
+                  class="stag text-sm bg-white dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 text-zinc-700 dark:text-zinc-300 px-3.5 py-1.5 rounded-full hover:border-accent">MongoDB</span>
+                <span role="listitem"
+                  class="stag text-sm bg-white dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 text-zinc-700 dark:text-zinc-300 px-3.5 py-1.5 rounded-full hover:border-accent">REST
+                  API</span>
+              </div>
+
+            </div>
+          </article>
+
+          <article
+            class="reveal d1 card-h group bg-white dark:bg-zinc-900 rounded-2xl overflow-hidden border border-zinc-100 dark:border-zinc-800 hover:border-accent">
+            <div class="pf w-full h-44">
+              <img src="img/loan-app1.png" alt="PocketRoom" loading="lazy">
+            </div>
+            <div class="p-6">
+              <div class="flex items-center gap-3 mb-3">
+                <span class="text-xs text-zinc-400">Feb 2026 – Apr 2026 </span>
+              </div>
+              <a href="blog-article.html">
+                <h3
+                  class="font-display font-bold text-lg text-zinc-900 dark:text-white mb-2 group-hover:text-accent transition-colors">
+                  Loan Approval & Loan Amount Prediction System</h3>
+              </a>
+              <p class="text-sm text-zinc-500 dark:text-zinc-400 leading-relaxed mb-4">An AR and AI-powered furniture
+                visualization app that enables users to seamlessly preview and place 3D furniture in their own spaces
+                before making purchase decisions.</p>
+              <div class="flex flex-wrap gap-2" role="list" aria-label="Skills">
+                <span role="listitem"
+                  class="stag text-sm bg-white dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 text-zinc-700 dark:text-zinc-300 px-3.5 py-1.5 rounded-full hover:border-accent">Python</span>
+                <span role="listitem"
+                  class="stag text-sm bg-white dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 text-zinc-700 dark:text-zinc-300 px-3.5 py-1.5 rounded-full hover:border-accent">Pandas</span>
+                <span role="listitem"
+                  class="stag text-sm bg-white dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 text-zinc-700 dark:text-zinc-300 px-3.5 py-1.5 rounded-full hover:border-accent">NumPy</span>
+                <span role="listitem"
+                  class="stag text-sm bg-white dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 text-zinc-700 dark:text-zinc-300 px-3.5 py-1.5 rounded-full hover:border-accent">Scikit-Learn</span>
+                <span role="listitem"
+                  class="stag text-sm bg-white dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 text-zinc-700 dark:text-zinc-300 px-3.5 py-1.5 rounded-full hover:border-accent">Matplotlib</span>
+                <span role="listitem"
+                  class="stag text-sm bg-white dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 text-zinc-700 dark:text-zinc-300 px-3.5 py-1.5 rounded-full hover:border-accent">Jupyter
+                  Notebook</span>
+              </div>
+
+            </div>
+          </article>
+
+          <article
+            class="reveal d1 card-h group bg-white dark:bg-zinc-900 rounded-2xl overflow-hidden border border-zinc-100 dark:border-zinc-800 hover:border-accent">
+            <div class="pf w-full h-44">
+              <img src="/img/dm-delay2.png" alt="PocketRoom" loading="lazy">
+            </div>
+            <div class="p-6">
+              <div class="flex items-center gap-3 mb-3">
+                <span class="text-xs text-zinc-400">Jun 2025 – Sep 2025</span>
+              </div>
+              <a href="blog-article.html">
+                <h3
+                  class="font-display font-bold text-lg text-zinc-900 dark:text-white mb-2 group-hover:text-accent transition-colors">
+                  DM Delay — Message Scheduling App</h3>
+              </a>
+              <p class="text-sm text-zinc-500 dark:text-zinc-400 leading-relaxed mb-4">A modern message scheduling app
+                that enables users to send delayed messages with cancellation controls, real-time feedback, and a fully
+                type-safe React architecture.</p>
+              <div class="flex flex-wrap gap-2" role="list" aria-label="Skills">
+                <span role="listitem"
+                  class="stag text-sm bg-white dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 text-zinc-700 dark:text-zinc-300 px-3.5 py-1.5 rounded-full hover:border-accent">React(TypeScript)</span>
+                <span role="listitem"
+                  class="stag text-sm bg-white dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 text-zinc-700 dark:text-zinc-300 px-3.5 py-1.5 rounded-full hover:border-accent">Vite</span>
+                <span role="listitem"
+                  class="stag text-sm bg-white dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 text-zinc-700 dark:text-zinc-300 px-3.5 py-1.5 rounded-full hover:border-accent">Tailwind
+                  CSS</span>
+                <span role="listitem"
+                  class="stag text-sm bg-white dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 text-zinc-700 dark:text-zinc-300 px-3.5 py-1.5 rounded-full hover:border-accent">shadcn/ui</span>
+              </div>
+
+            </div>
+          </article>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══ SKILLS ═══ -->
+
+    <section id="skills" class="py-24 bg-zinc-50 dark:bg-zinc-900/40">
+      <div class="max-w-6xl mx-auto px-6">
+        <div class="mb-14">
+          <p class="reveal text-xs font-medium text-accent tracking-widest uppercase mb-3">What I do</p>
+          <h2 class="reveal d1 font-display font-bold text-4xl md:text-5xl text-zinc-900 dark:text-white">Skills</h2>
+        </div>
+        <div class="grid md:grid-cols-4 gap-6">
+
+          <article
+            class="reveal d3 card-h group bg-white dark:bg-zinc-900 rounded-2xl p-8 border border-zinc-100 dark:border-zinc-800 hover:border-accent">
+
+            <h3 class="font-display font-bold text-lg text-accent tracking-widest uppercase mb-6"> / Languages </h3>
+            <ul class="space-y-5">
+
+              <li class="flex items-center gap-4">
+                <i class="devicon-java-plain colored text-2xl"></i>
+                <span class="text-lg text-zinc-600 dark:text-zinc-400">Java</span>
+              </li>
+
+              <li class="flex items-center gap-4">
+                <i class="devicon-python-plain colored text-2xl"></i>
+                <span class="text-lg text-zinc-600 dark:text-zinc-400">Python</span>
+              </li>
+
+              <li class="flex items-center gap-4">
+                <i class="devicon-flutter-plain colored text-2xl"></i>
+                <span class="text-lg text-zinc-600 dark:text-zinc-400">Flutter</span>
+              </li>
+
+              <li class="flex items-center gap-4">
+                <i class="devicon-javascript-plain colored text-2xl"></i>
+                <span class="text-lg text-zinc-600 dark:text-zinc-400">JavaScript</span>
+              </li>
+
+              <li class="flex items-center gap-4">
+                <i class="devicon-typescript-plain colored text-2xl"></i>
+                <span class="text-lg text-zinc-600 dark:text-zinc-400">TypeScript</span>
+              </li>
+
+            </ul>
+          </article>
+
+          <article
+            class="reveal d2 card-h group bg-zinc-900 dark:bg-zinc-800 rounded-2xl p-8 border border-zinc-800 hover:border-accent ark:border-zinc-800 hover:border-accent">
+
+            <h3 class="font-display font-bold text-lg text-accent tracking-widest uppercase mb-6">/ Frameworks </h3>
+
+            <ul class="space-y-5">
+              <li class="flex items-center gap-4">
+                <i class="devicon-fastapi-plain colored text-2xl"></i>
+                <span class="text-lg text-zinc-400">FastAPI</span>
+              </li>
+
+              <li class="flex items-center gap-4">
+                <i class="devicon-spring-original colored text-2xl"></i>
+                <span class="text-lg text-zinc-400">Spring Boot</span>
+              </li>
+
+              <li class="flex items-center gap-4">
+                <i class="devicon-react-original colored text-2xl"></i>
+                <span class="text-lg text-zinc-400">React/Next.js</span>
+              </li>
+
+              <li class="flex items-center gap-4">
+                <i class="devicon-tailwindcss-original colored text-2xl"></i>
+                <span class="text-lg text-zinc-400">Tailwind CSS</span>
+              </li>
+            </ul>
+
+          </article>
+
+          <article
+            class="reveal d3 card-h group bg-white dark:bg-zinc-900 rounded-2xl p-8 border border-zinc-100 dark:border-zinc-800 hover:border-accent">
+            <h3 class="font-display font-bold text-lg text-accent tracking-widest uppercase mb-6">/ Storage Engines
+            </h3>
+            <ul class="space-y-5">
+              <li class="flex items-center gap-4">
+                <i class="devicon-postgresql-plain colored text-2xl"></i>
+                <span class="text-lg text-zinc-400">PostgreSQL</span>
+              </li>
+
+              <li class="flex items-center gap-4">
+                <i class="devicon-mysql-plain colored text-2xl"></i>
+                <span class="text-lg text-zinc-400">MySQL</span>
+              </li>
+
+              <li class="flex items-center gap-4">
+                <svg class="w-6 h-6 text-rose-500" fill="none" viewBox="0 0 24 24" stroke="currentColor"
+                  aria-hidden="true">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 6h5l3 3h6" />
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 18h5l3-3h6" />
+                  <circle cx="5" cy="6" r="2" fill="currentColor" stroke="none" />
+                  <circle cx="19" cy="9" r="2" fill="currentColor" stroke="none" />
+                  <circle cx="5" cy="18" r="2" fill="currentColor" stroke="none" />
+                  <circle cx="19" cy="15" r="2" fill="currentColor" stroke="none" />
+                </svg>
+                <span class="text-lg text-zinc-400">Qdrant(Vector)</span>
+              </li>
+
+              <li class="flex items-center gap-4">
+                <svg class="w-6 h-6 text-orange-500" fill="none" viewBox="0 0 24 24" stroke="currentColor"
+                  aria-hidden="true">
+                  <circle cx="12" cy="5" r="2" stroke-width="2" />
+                  <circle cx="6" cy="17" r="2" stroke-width="2" />
+                  <circle cx="18" cy="17" r="2" stroke-width="2" />
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                    d="M12 7v4M12 11H6v4M12 11h6v4" />
+                </svg>
+                <span class="text-lg text-zinc-400">Neo4j(Graph)</span>
+              </li>
+            </ul>
+
+          </article>
+
+
+          <article
+            class="reveal d2 card-h group bg-zinc-900 dark:bg-zinc-800 rounded-2xl p-8 border border-zinc-800 hover:border-accent">
+            <h3 class="font-display font-bold text-lg text-accent tracking-widest uppercase mb-6">/ Infrastructure </h3>
+
+            <ul class="space-y-5">
+              <li class="flex items-center gap-4">
+                <i class="devicon-docker-plain colored text-2xl"></i>
+                <span class="text-lg text-zinc-400">Docker Compose</span>
+              </li>
+
+              <li class="flex items-center gap-4">
+                <i class="devicon-github-original text-2xl text-zinc-400"></i>
+                <span class="text-lg text-zinc-400">GitHub Actions</span>
+              </li>
+
+              <li class="flex items-center gap-4">
+                <svg class="w-6 h-6 text-indigo-500" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                  <path d="M7.5 18.5h9.25A4.25 4.25 0 0017.2 10a5.75 5.75 0 00-11.05 1.55A3.5 3.5 0 007.5 18.5z" />
+                </svg>
+                <span class="text-lg text-zinc-400">Supabase/Vercel</span>
+              </li>
+
+              <li class="flex items-center gap-4">
+                <svg class="w-6 h-6 text-amber-500" fill="none" viewBox="0 0 24 24" stroke="currentColor"
+                  aria-hidden="true">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                    d="M12 3l7 3v5c0 4.5-2.8 8.5-7 10-4.2-1.5-7-5.5-7-10V6l7-3z" />
+                </svg>
+                <span class="text-lg text-zinc-400">Cloudflare/Render</span>
+              </li>
+            </ul>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══ ACHIEVEMENTS ═══ -->
+
+    <section id="achievements" class="py-24">
+      <div class="max-w-6xl mx-auto px-6">
+        <div class="mb-14">
+          <p class="reveal text-xs font-medium text-accent tracking-widest uppercase mb-3">Social proof</p>
+          <h2 class="reveal d1 font-display font-bold text-4xl md:text-5xl text-zinc-900 dark:text-white">Leadership &
+            Achievements</h2>
+        </div>
+
+
+
+        <div class="relative group">
+          <div id="achCarousel" class="relative overflow-hidden">
+
+            <div id="achTrack" class="flex gap-6 w-max">
+
+              <!-- Card 1 -->
+              <blockquote class="achievement-slide shrink-0 w-[380px] bg-zinc-900 rounded-2xl p-8">
+                <h3 class="font-display font-semibold text-xl text-white mb-0">
+                  Design and Branding Manager
+                </h3>
+                <h4 class="font-display font-semibold text-xl text-white mb-1">
+                  2025/26
+                </h4>
+                <p class="text-sm text-white mb-5">
+                  Students' Union of Informatics Institute of Technology (IIT)
+                </p>
+                <p class="text-zinc-400 text-sm leading-relaxed mb-6">
+                  In charge of event branding and maintaining the quality of media design across student-led initiatives
+                  and campaigns.
+                </p>
+                <!-- Image: replace src with your photo -->
+                <div class="w-full h-44 rounded-xl overflow-hidden mt-2">
+                  <img src="img/achievement1.jpg" alt="Design and Branding" loading="lazy"
+                    onerror="this.parentElement.innerHTML='<div style=\'width:100%;height:100%;background:#27272a;display:flex;flex-direction:column;align-items:center;justify-content:center;border:1.5px dashed #52525b;border-radius:12px;\'><svg width=\'28\' height=\'28\' fill=\'none\' viewBox=\'0 0 24 24\' stroke=\'#71717a\' style=\'margin-bottom:6px;\'><path stroke-linecap=\'round\' stroke-linejoin=\'round\' stroke-width=\'1.5\' d=\'M3 9a2 2 0 012-2h.172a2 2 0 001.664-.89l.812-1.22A2 2 0 019.312 4h5.376a2 2 0 011.664.89l.812 1.22A2 2 0 0018.828 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z\'/><path stroke-linecap=\'round\' stroke-linejoin=\'round\' stroke-width=\'1.5\' d=\'M15 13a3 3 0 11-6 0 3 3 0 016 0z\'/></svg><span style=\'color:#71717a;font-size:11px;font-family:sans-serif;\'>Add image here</span></div>';"
+                    style="width:100%;height:100%;object-fit:cover;">
+                </div>
+              </blockquote>
+
+              <!-- Card 2 -->
+              <blockquote class="achievement-slide shrink-0 w-[380px] bg-zinc-900 rounded-2xl p-8">
+                <h3 class="font-display font-semibold text-xl text-white mb-0">
+                  Program & Logistics Volunteer 
+                </h3>
+                <h4 class="font-display font-semibold text-xl text-white mb-1">
+                  2025/26
+                </h4>
+                <p class="text-sm text-white mb-5">
+                  Cutting Edge - IIT
+                </p>
+                <p class="text-zinc-400 text-sm leading-relaxed mb-6">
+                  Contributed to the Program and Logistics team, overseeing event coordination and supporting the successful execution of activities.
+                </p>
+                <!-- Image: replace src with your photo -->
+                <div class="w-full h-44 rounded-xl overflow-hidden mt-2">
+                  <img src="img/achievement1.jpg" alt="Design and Branding" loading="lazy"
+                    onerror="this.parentElement.innerHTML='<div style=\'width:100%;height:100%;background:#27272a;display:flex;flex-direction:column;align-items:center;justify-content:center;border:1.5px dashed #52525b;border-radius:12px;\'><svg width=\'28\' height=\'28\' fill=\'none\' viewBox=\'0 0 24 24\' stroke=\'#71717a\' style=\'margin-bottom:6px;\'><path stroke-linecap=\'round\' stroke-linejoin=\'round\' stroke-width=\'1.5\' d=\'M3 9a2 2 0 012-2h.172a2 2 0 001.664-.89l.812-1.22A2 2 0 019.312 4h5.376a2 2 0 011.664.89l.812 1.22A2 2 0 0018.828 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z\'/><path stroke-linecap=\'round\' stroke-linejoin=\'round\' stroke-width=\'1.5\' d=\'M15 13a3 3 0 11-6 0 3 3 0 016 0z\'/></svg><span style=\'color:#71717a;font-size:11px;font-family:sans-serif;\'>Add image here</span></div>';"
+                    style="width:100%;height:100%;object-fit:cover;">
+                </div>
+              </blockquote>
+
+
+              <!-- Card 3 -->
+              <blockquote class="achievement-slide shrink-0 w-[380px] bg-zinc-900 rounded-2xl p-8">
+                <h3 class="font-display font-semibold text-xl text-white mb-0">
+                  Delegate Handling Volunteer
+                </h3>
+                <h4 class="font-display font-semibold text-xl text-white mb-1">
+                  2024/25
+                </h4>
+                <p class="text-sm text-white mb-5">
+                  CodeSprintX - IEEE Student Branch of IIT
+                </p>
+                <p class="text-zinc-400 text-sm leading-relaxed mb-6">
+                  Managed participant registration and coordinated delegates throughout the event to ensure a smooth and
+                  organized experience.
+                </p>
+
+                <div class="w-full h-44 rounded-xl overflow-hidden mt-2">
+                  <img src="img/codesprint.png" alt="CodeSprintX" loading="lazy"
+                    onerror="this.parentElement.innerHTML='<div style=\'width:100%;height:100%;background:#27272a;display:flex;flex-direction:column;align-items:center;justify-content:center;border:1.5px dashed #52525b;border-radius:12px;\'><svg width=\'28\' height=\'28\' fill=\'none\' viewBox=\'0 0 24 24\' stroke=\'#71717a\' style=\'margin-bottom:6px;\'><path stroke-linecap=\'round\' stroke-linejoin=\'round\' stroke-width=\'1.5\' d=\'M3 9a2 2 0 012-2h.172a2 2 0 001.664-.89l.812-1.22A2 2 0 019.312 4h5.376a2 2 0 011.664.89l.812 1.22A2 2 0 0018.828 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z\'/><path stroke-linecap=\'round\' stroke-linejoin=\'round\' stroke-width=\'1.5\' d=\'M15 13a3 3 0 11-6 0 3 3 0 016 0z\'/></svg><span style=\'color:#71717a;font-size:11px;font-family:sans-serif;\'>Add image here</span></div>';"
+                    style="width:100%;height:100%;object-fit:cover;">
+                </div>
+              </blockquote>
+
+
+
+              <!-- Card 4 -->
+              <blockquote class="achievement-slide shrink-0 w-[380px] bg-zinc-900 rounded-2xl p-8">
+                <h3 class="font-display font-semibold text-xl text-white mb-0">
+                  Industry Outreach Volunteer
+                </h3>
+                <h4 class="font-display font-semibold text-xl text-white mb-1">
+                  2024/25
+                </h4>
+                <p class="text-sm text-white mb-5">
+                  Coderally 6.0 - IEEE Computer Society of IIT
+                </p>
+                <p class="text-zinc-400 text-sm leading-relaxed mb-6">
+                  Assisted in securing sponsorships while cultivating strong rapport between sponsors and event
+                  organizers.
+                </p>
+                <!-- Image: replace src with your photo -->
+                <div class="w-full h-44 rounded-xl overflow-hidden mt-2">
+                  <img src="img/Coderally.png" alt="Coderally" loading="lazy"
+                    onerror="this.parentElement.innerHTML='<div style=\'width:100%;height:100%;background:#27272a;display:flex;flex-direction:column;align-items:center;justify-content:center;border:1.5px dashed #52525b;border-radius:12px;\'><svg width=\'28\' height=\'28\' fill=\'none\' viewBox=\'0 0 24 24\' stroke=\'#71717a\' style=\'margin-bottom:6px;\'><path stroke-linecap=\'round\' stroke-linejoin=\'round\' stroke-width=\'1.5\' d=\'M3 9a2 2 0 012-2h.172a2 2 0 001.664-.89l.812-1.22A2 2 0 019.312 4h5.376a2 2 0 011.664.89l.812 1.22A2 2 0 0018.828 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z\'/><path stroke-linecap=\'round\' stroke-linejoin=\'round\' stroke-width=\'1.5\' d=\'M15 13a3 3 0 11-6 0 3 3 0 016 0z\'/></svg><span style=\'color:#71717a;font-size:11px;font-family:sans-serif;\'>Add image here</span></div>';"
+                    style="width:100%;height:100%;object-fit:cover;">
+                </div>
+              </blockquote>
+
+
+              <!-- Card 5 -->
+              <blockquote class="achievement-slide shrink-0 w-[380px] bg-zinc-900 rounded-2xl p-8">
+                <h3 class="font-display font-semibold text-xl text-white mb-0">
+                  Membership Development Volunteer
+                </h3>
+                <h4 class="font-display font-semibold text-xl text-white mb-1">
+                  2024/25
+                </h4>
+                <p class="text-sm text-white mb-5">
+                  Hacksphere '24 - IEEE Student Branch of IIT
+                </p>
+                <p class="text-zinc-400 text-sm leading-relaxed mb-6">
+                  Facilitated member registrations and participant coordination to enhance membership development
+                  efforts.
+                </p>
+                <!-- Image: replace src with your photo -->
+                <div class="w-full h-44 rounded-xl overflow-hidden mt-2">
+                  <img src="img/achievement4.jpg" alt="Hacksphere" loading="lazy"
+                    onerror="this.parentElement.innerHTML='<div style=\'width:100%;height:100%;background:#27272a;display:flex;flex-direction:column;align-items:center;justify-content:center;border:1.5px dashed #52525b;border-radius:12px;\'><svg width=\'28\' height=\'28\' fill=\'none\' viewBox=\'0 0 24 24\' stroke=\'#71717a\' style=\'margin-bottom:6px;\'><path stroke-linecap=\'round\' stroke-linejoin=\'round\' stroke-width=\'1.5\' d=\'M3 9a2 2 0 012-2h.172a2 2 0 001.664-.89l.812-1.22A2 2 0 019.312 4h5.376a2 2 0 011.664.89l.812 1.22A2 2 0 0018.828 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z\'/><path stroke-linecap=\'round\' stroke-linejoin=\'round\' stroke-width=\'1.5\' d=\'M15 13a3 3 0 11-6 0 3 3 0 016 0z\'/></svg><span style=\'color:#71717a;font-size:11px;font-family:sans-serif;\'>Add image here</span></div>';"
+                    style="width:100%;height:100%;object-fit:cover;">
+                </div>
+              </blockquote>
+
+              <!-- Card 6 -->
+              <blockquote class="achievement-slide shrink-0 w-[380px] bg-zinc-900 rounded-2xl p-8">
+                <h3 class="font-display font-semibold text-xl text-white mb-0">
+                  Standing Committee Member - Membership Development Avenue
+                </h3>
+                <h4 class="font-display font-semibold text-xl text-white mb-1">
+                  2024/25
+                </h4>
+                <p class="text-sm text-white mb-5">
+                  IEEE Student Branch of IIT
+                </p>
+                <p class="text-zinc-400 text-sm leading-relaxed mb-6">
+                  Facilitated member registrations and participant coordination to enhance membership development
+                  efforts.
+                </p>
+                <!-- Image: replace src with your photo -->
+                <div class="w-full h-44 rounded-xl overflow-hidden mt-2">
+                  <img src="img/achievement5.jpg" alt="IEEE Standing Committee" loading="lazy"
+                    onerror="this.parentElement.innerHTML='<div style=\'width:100%;height:100%;background:#27272a;display:flex;flex-direction:column;align-items:center;justify-content:center;border:1.5px dashed #52525b;border-radius:12px;\'><svg width=\'28\' height=\'28\' fill=\'none\' viewBox=\'0 0 24 24\' stroke=\'#71717a\' style=\'margin-bottom:6px;\'><path stroke-linecap=\'round\' stroke-linejoin=\'round\' stroke-width=\'1.5\' d=\'M3 9a2 2 0 012-2h.172a2 2 0 001.664-.89l.812-1.22A2 2 0 019.312 4h5.376a2 2 0 011.664.89l.812 1.22A2 2 0 0018.828 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z\'/><path stroke-linecap=\'round\' stroke-linejoin=\'round\' stroke-width=\'1.5\' d=\'M15 13a3 3 0 11-6 0 3 3 0 016 0z\'/></svg><span style=\'color:#71717a;font-size:11px;font-family:sans-serif;\'>Add image here</span></div>';"
+                    style="width:100%;height:100%;object-fit:cover;">
+                </div>
+              </blockquote>
+
+            </div>
+          </div>
+
+
+
+        </div>
+
+      </div>
+      </div>
+    </section>
+
+    <!-- ═══ CONTACT ═══ -->
+
+    <section id="contact" class="py-24 bg-zinc-50 dark:bg-zinc-900/40">
+      <div class="max-w-6xl mx-auto px-6">
+        <div class="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-14">
+          <section id="contact" class="py-24">
+            <div class="max-w-6xl mx-auto px-6">
+              <div class="bg-zinc-900 dark:bg-zinc-800 rounded-3xl p-10 md:p-16 relative overflow-hidden">
+                <div class="absolute top-0 right-0 w-64 h-64 bg-accent/20 rounded-full blur-3xl pointer-events-none"
+                  aria-hidden="true"></div>
+                <div class="absolute bottom-0 left-0 w-40 h-40 bg-accent/10 rounded-full blur-2xl pointer-events-none"
+                  aria-hidden="true"></div>
+
+                <div class="relative z-10 grid md:grid-cols-2 gap-12 items-start">
+
+                  <div>
+                    <p class="reveal text-xs font-medium text-accent tracking-widest uppercase mb-3">Get in touch</p>
+                    <h2 class="reveal d1 font-display font-bold text-4xl md:text-5xl text-white leading-tight mb-5">
+                      Let's connect</h2>
+                    <p class="reveal d2 text-zinc-400 leading-relaxed mb-8">I'm open to Software Engineering, Full
+                      Stack, and QA roles.
+                      Whether it's developing scalable applications, shipping great products,
+                      or improving software quality, let's connect.</p>
+
+                    <div class="reveal d3 flex flex-col gap-4">
+
+                      <a href="mailto:prageesha2305@gmail.com"
+                        class="group flex items-center gap-3 text-zinc-400 hover:text-white transition-colors">
+                        <span
+                          class="w-9 h-9 flex items-center justify-center bg-zinc-800 rounded-lg group-hover:bg-accent/20 transition-colors shrink-0">
+
+                          <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                              d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                          </svg>
+
+                        </span>
+                        <span class="text-sm">prageesha2305@gmail.com</span>
+                      </a>
+                      <a href="tel:+94702537266"
+                        class="group flex items-center gap-3 text-zinc-400 hover:text-white transition-colors">
+
+                        <span
+                          class="w-9 h-9 flex items-center justify-center bg-zinc-800 rounded-lg group-hover:bg-accent/20 transition-colors shrink-0">
+
+                          <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                              d="M3 5a2 2 0 012-2h2.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-1.3.65a11.042 11.042 0 005.516 5.516l.65-1.3a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.163 21 3 14.837 3 7V5z" />
+                          </svg>
+
+                        </span>
+
+                        <span class="text-sm">+94 70 253 7266</span>
+                      </a>
+
+                      <a href="#"
+                        class="group flex items-center gap-3 text-zinc-400 hover:text-white transition-colors">
+
+                        <span
+                          class="w-9 h-9 flex items-center justify-center bg-zinc-800 rounded-lg group-hover:bg-accent/20 transition-colors shrink-0">
+
+                          <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                              d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                              d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+                          </svg>
+
+                        </span>
+
+                        <span class="text-sm">Colombo, Sri Lanka</span>
+                      </a>
+
+                      <!-- Social icons row -->
+                      <div class="flex flex-row gap-3 pt-1 justify-center">
+
+                        <a href="https://www.linkedin.com/in/prageeshaprabhager" target="_blank"
+                          class="group text-zinc-400 hover:text-white transition-colors" aria-label="LinkedIn">
+                          <span
+                            class="w-11 h-11 flex items-center justify-center bg-zinc-800 rounded-lg group-hover:bg-accent/20 transition-colors">
+                            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                              <path
+                                d="M20.447 20.452H16.89V14.87c0-1.332-.027-3.045-1.856-3.045-1.858 0-2.142 1.45-2.142 2.949v5.678H9.336V9h3.414v1.561h.049c.476-.9 1.637-1.85 3.37-1.85 3.604 0 4.269 2.372 4.269 5.456v6.285zM5.337 7.433a2.063 2.063 0 1 1 0-4.126 2.063 2.063 0 0 1 0 4.126zM7.119 20.452H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" />
+                            </svg>
+                          </span>
+                        </a>
+
+                        <a href="https://github.com/prageesha-23" rel="noopener noreferrer" target="_blank"
+                          class="group text-zinc-400 hover:text-white transition-colors" aria-label="GitHub">
+                          <span
+                            class="w-11 h-11 flex items-center justify-center bg-zinc-800 rounded-lg group-hover:bg-accent/20 transition-colors">
+                            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                              <path
+                                d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z" />
+                            </svg>
+                          </span>
+                        </a>
+
+                        <a href="https://instagram.com/prageeshaaa" target="_blank" rel="noopener noreferrer"
+                          class="group text-zinc-400 hover:text-white transition-colors" aria-label="Instagram">
+                          <span
+                            class="w-11 h-11 flex items-center justify-center bg-zinc-800 rounded-lg group-hover:bg-accent/20 transition-colors">
+                            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                              <path
+                                d="M7.5 2h9A5.5 5.5 0 0 1 22 7.5v9A5.5 5.5 0 0 1 16.5 22h-9A5.5 5.5 0 0 1 2 16.5v-9A5.5 5.5 0 0 1 7.5 2zm0 2A3.5 3.5 0 0 0 4 7.5v9A3.5 3.5 0 0 0 7.5 20h9a3.5 3.5 0 0 0 3.5-3.5v-9A3.5 3.5 0 0 0 16.5 4h-9zM12 7a5 5 0 1 1 0 10 5 5 0 0 1 0-10zm0 2a3 3 0 1 0 0 6 3 3 0 0 0 0-6zm5.75-.9a1.15 1.15 0 1 1 0 2.3 1.15 1.15 0 0 1 0-2.3z" />
+                            </svg>
+                          </span>
+                        </a>
+
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="reveal d2">
+                    <form action="https://formspree.io/f/mrewdzjr" method="POST">
+                      <div class="flex flex-col gap-4">
+                        <div class="grid sm:grid-cols-2 gap-4">
+                          <div>
+                            <label for="fname" class="block text-xs font-medium text-zinc-400 mb-1.5">Name <span
+                                aria-hidden="true">*</span></label>
+                            <input type="text" id="fname" name="name" placeholder="Jane Smith" required
+                              autocomplete="name"
+                              class="w-full bg-zinc-800 border border-zinc-700 text-white text-sm rounded-xl px-4 py-3 placeholder-zinc-600 focus:outline-none focus:border-accent transition-colors">
+                          </div>
+                          <div>
+                            <label for="femail" class="block text-xs font-medium text-zinc-400 mb-1.5">Email <span
+                                aria-hidden="true">*</span></label>
+                            <input type="email" id="femail" name="email" placeholder="jane@company.com" required
+                              autocomplete="email"
+                              class="w-full bg-zinc-800 border border-zinc-700 text-white text-sm rounded-xl px-4 py-3 placeholder-zinc-600 focus:outline-none focus:border-accent transition-colors">
+                          </div>
+                        </div>
+                        <div>
+                          <label for="fsubject" class="block text-xs font-medium text-zinc-400 mb-1.5">Subject</label>
+                          <input type="text" id="fsubject" name="subject" placeholder="Project inquiry"
+                            class="w-full bg-zinc-800 border border-zinc-700 text-white text-sm rounded-xl px-4 py-3 placeholder-zinc-600 focus:outline-none focus:border-accent transition-colors">
+                        </div>
+                        <div>
+                          <label for="fmessage" class="block text-xs font-medium text-zinc-400 mb-1.5">Message <span
+                              aria-hidden="true">*</span></label>
+                          <textarea id="fmessage" name="message" rows="4" placeholder="Tell me about your project..."
+                            required
+                            class="w-full bg-zinc-800 border border-zinc-700 text-white text-sm rounded-xl px-4 py-3 placeholder-zinc-600 focus:outline-none focus:border-accent transition-colors resize-none"></textarea>
+                        </div>
+                        <button type="submit"
+                          class="shimmer w-full bg-accent text-white font-display font-bold text-sm py-3.5 rounded-xl hover:bg-accent-light transition-colors">
+                          Send message →
+                        </button>
+                      </div>
+                    </form>
+                  </div>
+
+                </div>
+              </div>
+            </div>
+          </section>
+  </main>
+
+  <!-- ═══ FOOTER ═══ -->
+
+  <footer class="border-t border-zinc-100 dark:border-zinc-900">
+    <div class="max-w-6xl mx-auto px-6 py-8 flex flex-col sm:flex-row items-center justify-between gap-4">
+      <p class="text-sm text-zinc-400">© <span id="yr"></span> Prageesha. All rights reserved. <br>
+      <p class="text-xs text-zinc-500">Built with
+        <a href="https://tailwindcss.com" rel="noopener noreferrer" target="_blank"
+          class="hover:text-accent transition-colors">Tailwind CSS</a> &amp;
+        <a href="https://alpinejs.dev" rel="noopener noreferrer" target="_blank"
+          class="hover:text-accent transition-colors">Alpine.js</a>
+      </p>
+    </div>
+  </footer>
+
+
+</body>
+
+</html>
